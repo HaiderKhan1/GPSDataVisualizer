@@ -19,46 +19,6 @@ jQuery(document).ready(function() {
         }
     });
 
-    // jQuery.ajax({
-    //     type: 'get',            //Request type
-    //     dataType: 'json',       //Data type - we will use JSON for almost everything 
-    //     url: '/createTables',   //The server endpoint we are connecting to
-    //     data: {},
-    //     success: function (data) {
-    //         console.log("created tables successfully");
-    //     },
-    //     fail: function(error) {
-    //         // Non-200 return, do something with error
-    //         console.log(error); 
-    //     }
-    // });
-
-    function populateFileLog(data) {   
-        if ( data == 0) {
-            alert("No files in server, please upload the files");
-        } else if (data == 1) {
-            jQuery.ajax({
-                type: 'get',            //Request type
-                dataType: 'json',       //Data type - we will use JSON for almost everything 
-                url: '/fileLogPanel',   //The server endpoint we are connecting to
-                data: {},
-                success: function (data) {
-                    //console.log(data);
-                    for (let i = 0; i < data.fileNum; i++) {
-                        let obj = JSON.parse(data.gpxdocs[i]);
-                        $('#fileView').append('<tr>Name<td> <a href='+obj.file+' download ">'+obj.file+'</a></td><td>'+obj.version+'</td><td>'+obj.creator+'</td><td>'+obj.numWaypoints+'</td><td>'+obj.numRoutes+'</td><td>'+obj.numTracks+'</td></tr>');
-                    }
-                    
-                },
-                fail: function(error) {
-                    // Non-200 return, do something with error
-                    console.log(error); 
-                }
-            });
-        }
-    };
-
-
     function populateFileLister(data) {   
         if ( data == 0) {
             alert("No files in server, please upload the files");
@@ -181,9 +141,6 @@ jQuery(document).ready(function() {
         
     });
 
-    $('#clearDataLen').click(function() {
-        $("#paths tr").remove();
-    });
 
     $("#fsAdd").change(function() {
         var input = $(this).children("option:selected").val();
