@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GPX Data</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CHANGE ME">
+    <meta name="keywords" content="CHANGE ME">
+    <meta name="author" content="CHANGE ME">
+    <!-- Load jquery, bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- Custom CSS End -->
+</head>
+<body>
+  <header>
+    <h3>GPX Data Visualizer</h3>
+  </header>
+    <p></p>
+
+    <div class = "center">
+      <p>File View Panel </p>
+    </div>
+
+    <div style="overflow-x:auto;">
+       <div style="height:150px;overflow:auto;">
+           
+    <table id = "fileView">
+        <tr>
+          <th>File Name (Click To Download)</th>
+          <th>Version</th>
+          <th>Creator</th>
+          <th>Number of Waypoints</th>
+          <th>Number of Routes</th>
+          <th>Number of tracks</th>
+        </tr>
+      </table>
+    </div>
+    </div>
+
+    <p></p>
+    <form ref='uploadForm' id='uploadForm' value = "Upload" action='/upload'
+    method='post'encType="multipart/form-data">
+    <div class="form-group">
+      <input id = "browse" type="file" name="uploadFile" class="btn btn-secondary" accept=".gpx">
+      <input id = "upload" type='submit' value='Upload' class="btn btn-secondary">
+    </div>
+`   </form>
+      <p></p>
+
+      <div class = "center">
+        <p>GPX View Panel</p>
+      </div>
+
+      <p><i>Usage Instructions: <br> 
+        Step 1) Select File From Drop Down. <br>
+        Step 2) <b>If You want to change file to view data, PRESS CLEAR </b> <br>
+             **** <b>NOTE: I do not have change name functionality. However, you can add routes, Please scroll down ****</b>
+      </i></p>
+
+      <p></p>
+      <form id = "fileDropDown">
+        <label for="files">Choose A File:</label>
+        <select id="FileSelector">
+          <option value ="Select File" selected>Select File</option>
+        </select>
+        <br>
+        <input id = "clearData" type='button' value='Clear Data' class="btn btn-secondary">
+      </form>
+      <p>Press Clear if you want to load the data of another file, before selecting the other file</p>
+
+      <p></p>
+      <div style="overflow-x:auto;">
+        <div style="height:250px;overflow:auto;">
+            
+     <table id = "viewPanel">
+      
+         <!-- <tr>
+           <th>Component</th>
+           <th>Name</th>
+           <th>Number of Points</th>
+           <th>Length</th>
+           <th>Loop</th>
+         </tr> -->
+       </table>
+     </div>
+     </div>
+
+     <p></p>
+    
+     <div class = "center">
+      <p>Create GPX File </p>
+    </div>
+
+    <p><i>Usage Instructions: <br> 
+      Step 1) Enter input feilds and press "Create GPX" <br>
+           **** <b>NOTE: To See this update in the data base, scroll down log in to data base, and click "Add Files" ****</b>
+    </i></p>
+    <p></p>
+    <div class = "centerContent">
+      <form id = "createFile">
+        <!-- <label for="name">GPX Name:</label>
+        <input type="text" id="name" required> -->
+        <label for="creator">Creator:</label>
+        <input type="text" id="creator" required>
+        <label for="version">Version:</label>
+        <input type="text" id="version" required>
+        <label for="fName">File Name:</label>
+        <input type="text" id="fName" required> <br>
+        <input id = "submitGPX" type='button' value='Create GPX' class="btn btn-secondary">
+        <!-- <input type="button" value="Clear" onClick="document.location.reload(true)"> -->
+      </form>
+      </div>
+      
+      <br><br>
+      <div class = "center">
+        <p>Add Route</p>
+      </div>
+      <p></p>
+      <form id = "fileDropDown">
+        <label for="fsAdd">Choose A File:</label>
+        <select id="fsAdd">
+          <option value ="Select File" selected>Select File</option>
+        </select>
+      </form>
+      <!-- <input type="button" value="Clear" onClick="document.location.reload(true)">
+      -->
+
+      <p></p>
+      <p><i>Usage Instructions: <br> 
+        Step 1) Select File Enter Route Name and fill the lat and lon values, click on "Add Another Waypoint" to add waypoint. <br>
+        Step 2) To add another waypoint, please delete the values you inputed and repeat [Step 1] <br>
+        Step 3) To Add this route to the file, click "Add Route To File" <br>
+             **** <b>NOTE: To See this update in the data base, scroll down log in to data base, and click "Add Files" ****</b>
+      </i></p>
+
+      <div class = "centerContent">
+      <form id="addRoute">
+        <label for="rteName">Route Name:</label>
+        <input type="text" id="retName" placeholder="Route Name"required> <br>
+        <br><br>
+        <label for="lat">Latitude:</label>
+        <input type="text" id="lat" placeholder="Latitude"required> <br>
+        <label for="lon">Longitude</label>
+        <input type="text" id="lon" placeholder="Longitude"required> <br>
+        <button type="button" id="reset">Add Another WayPoints</button> 
+        <p></p>
+        <button type="button" id="submitRte">Add Route To File</button>
+      </form>
+    </div>
+
+    <br>
+    <div class = "center">
+      <p>Find Path Between </p>
+    </div>
+
+    <p><i>Usage Instructions: <br> 
+      Step 1) Enter all values <br>
+      Step 2) Press "Get Path" <br>
+      Step 3) <b>NOTE: Before cheking the paths again, Please Press "Clear"</b> <br>
+    </i></p>
+
+    <div class = "centerContent">
+      <form id = "getPathBetween">
+        <label for="sourceLat">Source Latitude:</label>
+        <input type="text" id="sourceLat" placeholder="source Latitude" required>
+        <label for="sourceLon">Source Longitude:</label>
+        <input type="text" id="sourceLon" placeholder="source Longitude"required> <br>
+        <label for="destLat">Dest Latitude:</label>
+        <input type="text" id="destLat" placeholder="dest Latitude" required>
+        <label for="destLon">Dest Longitude:</label>
+        <input type="text" id="destLon" placeholder="dest Longitude"required> <br>
+        <label for="delta">Delta:</label>
+        <input type="text" id="delta" placeholder="Delta"required> <br>
+        <input id = "getLen" type='button' value='Get Paths' class="btn btn-secondary">
+        <input id = "clearDataLen" type='button' value='Clear Data' class="btn btn-secondary">
+        <!-- <input type="button" value="Clear" onClick="document.location.reload(true)"> -->
+        <p>Press Clear To Clear Results </p>
+      </form>
+      </div>
+
+      <div style="overflow-x:auto;">
+        <div style="height:250px;overflow:auto;">
+            
+     <table id = "paths">
+         <!-- <tr>
+           <th>Component</th>
+           <th>name</th>
+           <th>numPoints</th>
+           <th>Length</th>
+           <th>Loop</th>
+         </tr> -->
+
+       </table>
+     </div>
+     </div>
+
+     <div class = "center">
+       <p>GPX DataBase </p>
+     </div>
+
+     <p><i>Usage Instructions: <br> 
+      Step 1) Enter Values for data base name, username, password, the values which I used to test and run: <br>
+          Database Name: hkhan24 <br>
+          Username: hkhan24 <br>
+          password: 1098469 <br>
+      Step 2) Press Log in | <b> You will now have access to every A4 command <b><br>
+      <b>****NOTE: When You Add a route, or create a file, the page will refresh, please log back into database, and press "Add Files" <br> To make the changes occur in data base ****</b> <br>
+    </i></p>
+    
+     <br>
+
+     <div class = "centerContent">
+    <form id = "loginCreds">
+      <label for="databaseName">Data Base Name:</label><br>
+      <input type="text" id="databaseName" placeholder="databaseName" required><br>
+      <label for="username">Username:</label><br>
+      <input type="text" id="username" placeholder="username" required><br>
+      <label for="password">Password:</label><br>
+      <input type="text" id="password" placeholder="password"required><br> <br>
+      <input id = "login" type='button' value='login' class="btn btn-secondary"><br><br>
+    </form>
+    </div>
+<br>
+      <div id = "showDBCmds" style = "display: none;">
+        <div class = "centerContent">
+        <form id = "dbCmds">
+          <p>Data Base Actions: </p>
+          <input id = "storeFiles" type='button' value='Store All Files' class="btn btn-secondary"><br><br>
+          <input id = "dbStatus" type='button' value='Display DB Status' class ="btn btn-secondary"><br> <br>
+          <input id = "clearFiles" type='button' value='Clear All Data' class ="btn btn-secondary"><br> <br>
+          <h1>Run Queries</h1> 
+          <p><b>Query Instructions: After you execute any queury PLEASE HIT CLEAR AT BOTTOM TO CLEAR TABLE<br>
+            *** IF You notice some files, or routes are not avaliable in the drop down menu, please press "Store All Files" to update
+          </b></p>
+          <p>Query 1</p>
+          <div class = "rcorners">
+          <input id = "q1N" type='button' value='Display All Routes Sorted: Name' class ="btn btn-secondary"> <br><br>
+          <input id = "q1L" type='button' value='Display All Routes Sorted: Length' class ="btn btn-secondary"><br> <br>
+          
+        </div>
+        <br>
+        <p>Query 2</p>
+        <div class = "rcorners">
+          <label for="queryFs">Choose A File:</label>
+          <select id="queryFs">
+            <option value ="Select File" selected>Select File</option>
+          </select> <br><br>
+          <input id = "q2N" type='button' value='Display Routes From File Sorted: Name' class ="btn btn-secondary"> <br><br>
+          <input id = "q2L" type='button' value='Display Routes From File  Sorted: Length' class ="btn btn-secondary"><br><br>
+         
+        </div>
+        <br>
+        <p>Query 3</p>
+        <div class = "rcorners">
+          <select id="queryRs">
+            <option value ="Select Route" selected>Select Route</option>
+          </select> <br><br>
+          <input id = "q3" type='button' value='Display Points' class ="btn btn-secondary"><br> <br>
+         
+          </div>
+          <br>
+          <p>Query 4</p>
+          <div class = "rcorners">
+            <label for="query4Fs">Choose A File:</label>
+            <select id="query4Fs">
+              <option value ="Select File" selected>Select File</option>
+            </select> <br><br>
+            <input id = "q4N" type='button' value='Display Points From File Sorted: Name' class ="btn btn-secondary"> <br><br>
+            <input id = "q4L" type='button' value='Display Points From File  Sorted: Length' class ="btn btn-secondary"><br><br>
+           
+          </div>
+
+          <br>
+          <p>Query 5</p>
+          <div class = "rcorners">
+            <label for="query5Fs">Choose A File:</label>
+            <select id="query5Fs">
+              <option value ="Select File" selected>Select File</option>
+            </select> <br><br>
+            <input type="text" id="numRts" placeholder="Number of Routes" required><br><br>
+            <input id = "q5S" type='button' value='Display Shortest Routes From File' class ="btn btn-secondary"> <br><br>
+            <input id = "q5L" type='button' value='Display Longest Routes From File' class ="btn btn-secondary"><br><br>
+            <input type="radio" name="sort" id="sortName">Sort By Name<br>
+            <input type="radio" name="sort" id="sortLen"> Sort By Len <br>
+          </div>
+          <br><br>
+          <p><b>Query Instructions: PLEASE HIT CLEAR TO CLEAR TABLE IF YOU WANT TO RUN ANOTHER QUERY</b></p>
+          <input id = "clearDataQ" type='button' value='Clear Data' class="btn btn-secondary"><br>
+        </form>
+        </div>
+        <br><br>
+        <table id = "qData">
+      
+        </table>
+        </div>
+        <br><br>
+
+    <!-- Leave me at the bottom of body -->
+    <script src="/index.js"></script>
+</body>
+</html>

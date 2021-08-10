@@ -1,0 +1,112 @@
+html {
+    width: 60%;
+    height: 100%;
+    min-height: 100%;
+    margin: 0 auto;
+    font-size: 16px;
+    background-color: #FFFFFF;
+}
+
+body {
+    height: 100%;
+    min-height: 100%;
+    line-height: 1.75;
+    background-color: #FFFFFF;
+}
+a:link:hover {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    text-decoration: underline;
+    cursor: pointer;
+    cursor: hand;
+}
+input[type=submit], button {
+    cursor: pointer;
+    cursor: hand;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+td, th {
+    border: 2px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Style the header */
+  header {
+    background-color: rgb(29, 172, 197);
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    color: white;
+    width: 100%;
+  }
+
+  .center {
+    border: 3px solid #3f3f3b;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(29, 172, 197);
+    }
+
+    .centerContent {
+      
+      border: 1px solid #3f3f3b;display: flex;
+      justify-content: center;
+      text-align: center;
+      font-size: 20px;
+      color: rgb(0, 0, 0);
+      padding:2px;
+      background-color: rgb(211, 224, 20);
+    }
+
+    .rcorners {
+        border-radius: 25px;
+        border: 2px solid #000000;
+        justify-content: center;
+        text-align: center;
+        font-size: 20px;
+        color: rgb(0, 0, 0);
+        padding: 20px;
+       
+      }
+
+
+
+
+
+@media(max-width: 900px) {
+    html {
+        font-size: 14px !important;
+        width: 80% !important;
+    }
+}
+@media(max-width: 480px) {
+    html {
+        font-size: 12px !important;
+        width: 90% !important;
+    }
+}
+@media(max-width: 320px) {
+    html {
+        font-size: 12px !important;
+        width: 100% !important;
+    }
+}
