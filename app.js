@@ -97,9 +97,6 @@ console.log('Running app at localhost: ' + portNum);
 
 
 let cLib = ffi.Library('./libgpxparser', {
-  'GPXFILEtoJSON': ['string', ['string', 'string']], 'covertJSONtoGPX':['int', ['string','string','string']],
-  'getRoutesinJSON':['string', ['string', 'string', 'float', 'float', 'float','float', 'float']],
-  'getTracksinJSON':['string', ['string', 'string', 'float', 'float', 'float','float', 'float']],
   'addRte':['int', ['string','string','string']], 'addWpt':['int', ['string','string','string']],
   'validateFile':['int', ['string', 'string']]
 });
@@ -313,10 +310,6 @@ app.get('/databaseStatus', async function(req, res) {
   } finally {
     if (connection && connection.end) connection.end();
   }
-
-  ret.push(numFiles[0][0]["COUNT(*)"]);
-  ret.push(numRoutes[0][0]["COUNT(*)"]);
-  ret.push(numPoints[0][0]["COUNT(*)"]);
   res.send({ret});
 
 });
@@ -396,36 +389,5 @@ app.get('/q3', async function(req, res) {
 
 });
 
-
-app.get('/q5', async function(req, res) {
-  let connection;
-  try {
-    connection = await mysql.createConnection(dbConf);
-    const [row2, col1] = await connection.execute('SELECT gpx_id from FILE where file_name = \"'+req.query.fileName+'\" ');
-    if (req.query.qType === "longest") {
-      if (req.query.nameSort === true) {
-        const [rows, cols] = await connection.execute('SELECT * FROM ROUTE WHERE gpx_id = \"'+row2[0].gpx_id+'\" ORDER BY route_len DESC, route_name LIMIT '+req.query.limit+';');   
-        res.send ({records:rows});
-      } else {
-        const [rows, cols] = await connection.execute('SELECT * FROM ROUTE WHERE gpx_id = \"'+row2[0].gpx_id+'\" ORDER BY route_len DESC LIMIT '+req.query.limit+';');   
-        res.send ({records:rows});
-      }
-   
-    } else if (req.query.qType === "shortest") {
-      if (req.query.nameSort === true) {
-        const [rows, cols] = await connection.execute('SELECT * FROM ROUTE WHERE gpx_id = \"'+row2[0].gpx_id+'\" ORDER BY route_len ASC, route_name LIMIT '+req.query.limit+';');   
-        res.send ({records:rows});
-      } else {
-        const [rows, cols] = await connection.execute('SELECT * FROM ROUTE WHERE gpx_id = \"'+row2[0].gpx_id+'\" ORDER BY route_len ASC LIMIT '+req.query.limit+';');   
-        res.send ({records:rows});
-      }
-     
-    }
-
-  } catch (e) {
-    console.log("Query error: " + e);
-  } finally {
-    if (connection && connection.end) connection.end();
-  }
 
 });
